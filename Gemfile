@@ -19,6 +19,7 @@ gem 'cancancan'
 gem 'materialize-sass'
 gem 'material_icons'
 gem 'redis'
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :test do
   gem "factory_girl_rails"
@@ -27,7 +28,6 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
-
   gem 'byebug', platform: :mri
 end
 
@@ -37,5 +37,3 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
