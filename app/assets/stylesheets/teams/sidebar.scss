@@ -23,3 +23,9 @@
 .team_content {
   padding-left: 220px;
 }
+
+@media only screen and (max-width: 992px) {
+  .team_content {
+    padding-left: 0px;
+  }
+}
