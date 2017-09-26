@@ -93,7 +93,7 @@ describe TeamsController do
         expect(response).to have_http_status(:success)
       end
 
-      it "delete the rigth team" do 
+      it "delete the rigth team" do
         team = FactoryGirl.create(:team, user: @current_user)
         delete :destroy, params: { id: team.id }
         expect(Team.last.id).not_to eql(team.id)
