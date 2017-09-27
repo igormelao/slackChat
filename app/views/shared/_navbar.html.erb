@@ -14,7 +14,7 @@
                 <li><a href="/<%= team.slug %>"><%= team.slug %></a></li>
                 <li class="divider"></li>
               <%  end %>
-              <li><a class="" href="#add_team_model">+ Add Team</a></li>
+              <li><a class="modal-trigger" href="#add_team_modal">+ Add Team</a></li>
             </ul>
           </li>
           <li> <%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>

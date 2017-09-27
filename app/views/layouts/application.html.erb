@@ -19,5 +19,11 @@
         <%= yield %>
       </div>
     </main>
+    <% if current_user %>
+      <%= render "teams/add_modal" %>
+      <% if @team %>
+        <%= render "teams/remove_modal" %>
+      <% end %>
+    <% end %>
   </body>
 </html>
