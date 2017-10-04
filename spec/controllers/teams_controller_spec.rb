@@ -28,20 +28,12 @@ describe TeamsController do
         end
       end
 
-      context "user is member of the team" do
-        it "returns success"
-      end
-
-      context "user is not the owner of the team" do
+      context "user is not the owner or member of the team" do
         it "redirects to root" do
           team = FactoryGirl.create(:team, user: FactoryGirl.create(:user))
           get :show, params: { slug: team.slug }
           expect(response).to redirect_to('/')
         end
-      end
-
-      context "user is not a member of the team" do
-        it "redirects to root"
       end
 
       context "team don't exists" do
@@ -106,10 +98,6 @@ describe TeamsController do
         delete :destroy, params: { id: team.id }
         expect(response).to have_http_status(:forbidden)
       end
-    end
-
-    context "User is member of the team" do
-      it "returns http forbidden"
     end
   end
 end
