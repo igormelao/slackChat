@@ -22,7 +22,7 @@
                      <li class="channel_1">
                         <div>
                            <a href="#" class="open_channel">
-                           <span id="1">#General</span>
+                             <span id="1">#General</span>
                            </a>
                         </div>
                      </li>
@@ -54,7 +54,7 @@
                             <li class="user_<%= user.id %>">
                                <div>
                                   <a href="#" id="<%= user.id %>" class="open_user">
-                                  <span id="<%= user.id %>"><%= user.name %></span>
+                                    <span id="<%= user.id %>"><%= user.name %></span>
                                   </a>
                                   <% if can? :destroy, @team %>
                                     <a class="right remove_user" id="<%= user.id %>" href="#" style="color: #ccc">
