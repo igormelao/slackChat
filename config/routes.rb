@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'channels/create'
+
+  get 'channels/destroy'
+
+  get 'channels/show'
+
   root to: 'teams#index'
 
   get '/:slug', to: 'teams#show'

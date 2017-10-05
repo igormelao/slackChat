@@ -11,6 +11,11 @@ class Ability
       can [:create, :destroy], TeamUser do |t|
         t.team.user_id == user.id
       end
+
+      can [:create], Channel do |c|
+        c.team.user_id == user.id || c.team.users.where(id: user.id).present?
+      end
+
     end
   end
 end

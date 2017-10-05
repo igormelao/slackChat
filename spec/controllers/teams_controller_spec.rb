@@ -88,7 +88,7 @@ describe TeamsController do
       it "delete the rigth team" do
         team = FactoryGirl.create(:team, user: @current_user)
         delete :destroy, params: { id: team.id }
-        expect(Team.last.id).not_to eql(team.id)
+        expect(Team.all.count).to eq(0)
       end
     end
 
