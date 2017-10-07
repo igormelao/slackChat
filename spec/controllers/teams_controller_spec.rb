@@ -62,6 +62,11 @@ describe TeamsController do
         expect(Team.last.user_id).to eql(@current_user.id)
         expect(Team.last.slug).to eql(@team_attributes[:slug])
       end
+
+      it "with general channel created" do
+        expect(Team.last.channels.count).to eq(1)
+        expect(Team.last.channels[0].slug).to eq("general")
+      end
     end
 
     context "create team with errors" do
