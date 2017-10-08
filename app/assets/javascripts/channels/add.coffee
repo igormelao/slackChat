@@ -1,6 +1,7 @@
 $(document).on 'turbolinks:load', ->
   $(".add_channel").on 'click', (e) =>
     $('#add_channel_modal').modal('open')
+    $('#channel_slug').val("")
     return false
 
   $('.add_channel_form').on 'submit', (e) ->

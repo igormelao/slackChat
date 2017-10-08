@@ -1,5 +1,6 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:destroy, :show]
+
   def create
     @channel = Channel.new(channel_params)
     authorize! :create, @channel
@@ -15,13 +16,10 @@ class ChannelsController < ApplicationController
 
   def destroy
     authorize! :destroy, @channel
-
+    @channel.destroy
+    
     respond_to do |format|
-      if @channel.destroy
-        format.json { render :show, status: :created }
-      else
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
-      end
+      format.json { render json: true }
     end
   end
 
