@@ -23,7 +23,7 @@
                      <li class="channel_<%= channel.id %>">
                         <div>
                            <a href="#" class="open_channel" id="<%= channel.id %>">
-                           <span id="<%= channel.id %>">#<%= channel.slug %></span>
+                             <span id="<%= channel.id %>">#<%= channel.slug %></span>
                            </a>
                            <% if can? :destroy, channel %>
                            <a class="right remove_channel" href="#" id="<%= channel.id %>">

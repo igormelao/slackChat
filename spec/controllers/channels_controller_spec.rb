@@ -65,24 +65,36 @@ describe ChannelsController do
       before(:each) do
         team = FactoryGirl.create(:team, user: @current_user)
         @channel = FactoryGirl.create(:channel, team: team, user: @current_user)
+
+        @message1 = FactoryGirl.create(:message)
+        @message2 = FactoryGirl.create(:message)
+
+        @channel.messages << [@message1, @message2]
+
         get :show, params: { id: @channel.id }
+
+        @channel_hash = JSON.parse(response.body)
       end
 
       it "returns http succes" do
         expect(response).to have_http_status(:success)
       end
 
-      it "returns with right association in team" do
-        expect(Team.last.channels.count).to eq(2)
-        expect(Team.last.channels[1].slug).to eq(@channel.slug)
+      it "returns right channel values" do
+        expect(@channel_hash["slug"]).to eq(@channel.slug)
+        expect(@channel_hash["team_id"]).to eq(@channel.team.id)
+        expect(@channel_hash["user_id"]).to eq(@channel.user.id)
       end
 
-      it "returns right channel values" do
-        channel_hash = JSON.parse(response.body)
+      it "returns with the rigth number of messages" do
+        expect(@channel_hash["messages"].count).to eql(2)
+      end
 
-        expect(channel_hash["slug"]).to eq(@channel.slug)
-        expect(channel_hash["team_id"]).to eq(@channel.team.id)
-        expect(channel_hash["user_id"]).to eq(@channel.user.id)
+      it "returns the right messages" do
+        expect(@channel_hash["messages"][0]["body"]).to eql(@message1.body)
+        expect(@channel_hash["messages"][0]["user_id"]).to eql(@message1.user_id)
+        expect(@channel_hash["messages"][1]["body"]).to eql(@message2.body)
+        expect(@channel_hash["messages"][1]["user_id"]).to eql(@message2.user_id)
       end
     end
 
