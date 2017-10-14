@@ -26,6 +26,8 @@ services:
       - '.:/onebitchat'
     volumes_from:
     - box
+    stdin_open: true
+    tty: true
 
   box:
     image: busybox

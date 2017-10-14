@@ -21,22 +21,23 @@ window.add_message =(message, message_date, name) ->
 window.open = (id, type) ->
   clean_messages()
   $.ajax "/" + type + "/" + id,
-    type: 'GET'
-    contentType: 'application/json',
-    dataType: 'json',
-    data :{ team_id: $(".team_id").val() }
-    success: (data, text, jqXHR) ->
-      set_chat(data['slug'])
+      type: 'GET'
+      contentType:'application/json',
+      dataType: 'json',
+      data: {team_id: $(".team_id").val()}
+      success: (data, text, jqXHR) ->
+        set_chat(data['slug'])
 
-      if(data['messages'])
+        window.change_chat(id, type, $(".team_id").val())
+
+        if(data['messages'])
           for message in data['messages']
             do ->
-                add_message(message['body'], message['date'], message['user']['name'])
+              window.add_message(message['body'], message['date'], message['user']['name'])
+      error: (jqXHR, textStatus, errorThrown) ->
+        Materialize.toast("Problem to get " + type + ' informations.', 4000, 'red')
 
-    error: (jqXHR, textStatus, errorThrown) ->
-      Materialize.toast("Problem to get " + type + ' informations.', 4000, 'red')
-
-  return false
+    return false
 
   window.add = (slug, id, type) ->
     additional = if type == "channel" then "#" else ""

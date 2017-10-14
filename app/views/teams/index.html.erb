@@ -1,9 +1,9 @@
 <div class="center row no_team">
-  <% if current_user.teams.present? %>
+  <% if current_user.my_teams.present? %>
     <h5>Your Teams</h5>
     <div class="row">
       <ul class="collection col m4 offset-m4 s10 offset-s1">
-        <% current_user.teams.each do |team| %>
+        <% current_user.my_teams.each do |team| %>
           <li class="collection-item dismissable">
             <div>
               <%= team.slug %>
