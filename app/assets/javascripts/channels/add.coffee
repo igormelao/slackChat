@@ -1,7 +1,6 @@
 $(document).on 'turbolinks:load', ->
   $(".add_channel").on 'click', (e) =>
     $('#add_channel_modal').modal('open')
-    $('#channel_slug').val("")
     return false
 
   $('.add_channel_form').on 'submit', (e) ->
@@ -15,10 +14,10 @@ $(document).on 'turbolinks:load', ->
           }
         }
         success: (data, text, jqXHR) ->
-          window.add(data['slug'], data['id'], 'channel')
-          window.open(date['id'], 'channels')
+          window.add(data['slug'], data['id'], 'channels')
+          window.open(data['id'], 'channels')
           Materialize.toast('Success in add Channel &nbsp;<b>:)</b>', 4000, 'green')
-        error: (jdXHR, textStatus, errorThrown) ->
+        error: (jqXHR, textStatus, errorThrown) ->
           Materialize.toast('Problem in add Channel &nbsp;<b>:)</b>', 4000, 'red')
 
     $('#add_channel_modal').modal('close')
