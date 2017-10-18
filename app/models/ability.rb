@@ -20,6 +20,10 @@ class Ability
         c.team.user_id == user.id || c.user_id == user.id
       end
 
+      can :read, Talk do |t|
+        (t.user_one_id == user.id || t.user_two_id == user.id) && t.team.users.include?(user)
+      end
+
     end
   end
 end
