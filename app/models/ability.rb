@@ -21,7 +21,7 @@ class Ability
       end
 
       can :read, Talk do |t|
-        (t.user_one_id == user.id || t.user_two_id == user.id) && t.team.users.include?(user)
+        (t.user_one_id == user.id || t.user_two_id == user.id) && t.team.my_users.include?(user)
       end
 
     end

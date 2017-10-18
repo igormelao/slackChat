@@ -26,7 +26,7 @@ RSpec.describe TalksController, type: :controller do
           @talk = FactoryGirl.create(:talk, user_one: @current_user, user_two: @guest_user, team: @team)
 
           @message1 = FactoryGirl.create(:message)
-          @message2 = FactoryGirl.create(:message)
+          @message2 = FactoryGirl.create(:message, body: "blah")
           @talk.messages << [@message1, @message2]
 
           get :show, params: {id: @guest_user, team_id: @team.id}
@@ -47,19 +47,6 @@ RSpec.describe TalksController, type: :controller do
           expect(response_hash["messages"][0]["user_id"]).to eql(@message1.user.id)
           expect(response_hash["messages"][1]["body"]).to eql(@message2.body)
           expect(response_hash["messages"][1]["user_id"]).to eql(@message2.user.id)
-        end
-      end
-
-      context "Isn't talk member" do
-        it "returns http forbidden" do
-          @team = FactoryGirl.create(:team)
-          @guest_user = FactoryGirl.create(:user)
-          @team.users << [@guest_user, @current_user]
-          @talk = FactoryGirl.create(:talk, user_two: @guest_user, team: @team)
-
-          get :show, params: { id: @guest_user, team_id: @team.id}
-
-          expect(response).to have_http_status(:forbidden)
         end
       end
 
