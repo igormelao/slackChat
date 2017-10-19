@@ -16,4 +16,10 @@ class Team < ApplicationRecord
   def my_users
     self.users + [self.user]
   end
+
+  def team_user(user)
+    team_user = self.team_users.select{ |team_user| team_user.id == user.id }
+    byebug
+    team_user
+  end
 end

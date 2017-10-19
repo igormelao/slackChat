@@ -68,5 +68,24 @@ describe TeamUsersController do
         expect(response).to have_http_status(:forbidden)
       end
     end
+    context "left the Team" do
+      it "return http success" do
+        @team = FactoryGirl.create(:team)
+        @team.users << @current_user
+
+        delete :destroy, params: { id: @current_user, team_id: @team.id }
+
+        expect(response).to have_http_status(:success)
+      end
+      it "returns http forbidden when is not current user" do
+        @team = FactoryGirl.create(:team)
+        @team.users << @current_user
+        @guest_user = FactoryGirl.create(:user)
+
+        delete :destroy, params: { id: @guest_user, team_id: @team.id }
+
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
   end
 end

@@ -7,6 +7,15 @@
              <i class="material-icons" id="<%= @team.id %>">settings</i>
            </a>
          <% end %>
+         <% @team.team_users.each do |team_user| %>
+           <%  if team_user.user == current_user %>
+               <% if can? :destroy, team_user %>
+                 <a class="right team_icon exit_user" id="<%= team_user.user.id %>" href="#" style="color: #ccc">
+                   <i class="material-icons" id="<%= team_user.user.id %>">exit_to_app</i>
+                 </a>
+               <% end %>
+           <% end %>
+         <% end %>
       </div>
    </li>
    <li>
